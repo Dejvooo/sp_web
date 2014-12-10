@@ -3,6 +3,14 @@ body {
   padding-bottom: 30px;
 }
 
+.nadpis {
+  font-size: 22px;
+}
+
+p.right {
+  text-align: right;
+}
+
 .theme-dropdown .dropdown-menu {
   position: static;
   display: block;

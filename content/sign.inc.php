@@ -40,7 +40,7 @@
        
       for($j = 0; $j < 5; $j++) {
       $k = ($i * 5) + $konference15 + $j - 5;                            
-      $template_menu_params["menu_polozky"] .= "<li><a href='?page=tym&id=".$sortedTym[$k]['id_tym']."'>".$sortedTym[$k]['mesto']." ".$sortedTym[$k]['nazev']."</a></li>";
+      $template_menu_params["menu_polozky"] .= "<li><a href='?page=tym&amp;id=".$sortedTym[$k]['id_tym']."'>".$sortedTym[$k]['mesto']." ".$sortedTym[$k]['nazev']."</a></li>";
       }
     }
     $template_menu_params["menu_polozky"] .= "</ul>
@@ -133,8 +133,8 @@
 	else
 	{
 		$template_menu_params["login"] = "
-      <a href='index.php?action=logout_go' class='navbar-form navbar-right'><button type='submit' class='btn btn-primary'>Odhlásit</button></a>
-      <a href='?page=profil' class='navbar-form navbar-right'><button type='submit' class='btn btn-success'>Nastavení účtu</button></a>";
+      <a href='index.php?action=logout_go' class='navbar-form navbar-right'><span class='btn btn-primary'>Odhlásit</span></a>
+      <a href='?page=profil' class='navbar-form navbar-right'><span class='btn btn-success'>Nastavení účtu</span></a>";
 
 	}
   // ---ENDLOGIN---

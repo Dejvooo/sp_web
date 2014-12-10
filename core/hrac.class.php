@@ -121,7 +121,8 @@ class hrac extends db
 		$select_columns_string = "*"; 
 		$where_array[] = array("column" => "hrac", "value" => $id_hrac, "symbol" => "=");
 		$limit_string = "";
-		$order_by_array = array();
+		$order_by_array[0] = array("column" => "sezona", "sort" => "ASC");
+    $order_by_array[1] = array("column" => "id_prestup", "sort" => "ASC");
     $inner1 = "tym";
     $inner2 = "hrac";
 	

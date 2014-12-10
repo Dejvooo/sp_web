@@ -55,20 +55,20 @@
     }
   }
   
-  $template_params["header"] = "<h1>Editace týmu ".$tym_selected["mesto"]." ".$tym_selected["nazev"];
+  $template_params["header"] = "<h1>Editace týmu ".$tym_selected["mesto"]." ".$tym_selected["nazev"]."</h1>";
   
   // TABLE HEADER 
-  $template_params["table"] = "<table class='table table-hover'>";
+  $template_params["table"] = "<form action='?page=edit_tym&amp;id=$id_tym' method='post'>
+  <table class='table table-hover'>";
   
   // TABLE DATA
                                   
   $template_params["table"] .= "
-    <form action='' method='post'>
       <tr><td>Město:</td> <td><input type='text' name='mesto' value='".@htmlspecialchars($tym_selected['mesto'], ENT_QUOTES)."'></td></tr>
       <tr><td>Název:</td> <td><input type='text' name='nazev' value='".@htmlspecialchars($tym_selected['nazev'], ENT_QUOTES)."'></td></tr>
       <tr><td>Rok zalozeni:</td> <td><input type='text' name='rok_zalozeni' value='".@htmlspecialchars($tym_selected['rok_zalozeni'], ENT_QUOTES)."'></td></tr>
       <tr><td>Stadion:</td> <td><input type='text' name='stadion' value='".@htmlspecialchars($tym_selected['stadion'], ENT_QUOTES)."'></td></tr>
-      <tr><td>Kapacita:</td> <td><input type='text' name='kapacita' value='".@htmlspecialchars($tym_selected['kapacita'], ENT_QUOTES)."'></td></tr><br />
+      <tr><td>Kapacita:</td> <td><input type='text' name='kapacita' value='".@htmlspecialchars($tym_selected['kapacita'], ENT_QUOTES)."'></td></tr>
       <tr><td>Trenér:</td> <td><input type='text' name='trener' value='".@htmlspecialchars($tym_selected['trener'], ENT_QUOTES)."'></td></tr>
       <tr><td>Web:</td> <td><input type='text' name='web' value='".@htmlspecialchars($tym_selected['web'], ENT_QUOTES)."'></td></tr>
       <tr><td>Konfernece:</td> <td><select name='konference'>
@@ -79,11 +79,11 @@
                                     $template_params["table"] .= ">Západní</option>
                                   </select></td></tr>
       <tr><td>Divize:</td> <td><input type='text' name='divize' value='".@htmlspecialchars($tym_selected['divize'], ENT_QUOTES)."'></td></tr>
-      <tr><td><button type='submit' name='edit_go' class='btn btn-primary'>Uložit</button></td><td></td></tr>
-    </form>";
+      <tr><td><button type='submit' name='edit_go' class='btn btn-primary'>Uložit</button></td><td></td></tr>";
   
   // TABLE FOOTER
-  $template_params["table"] .= "</table>";
+  $template_params["table"] .= "</table>
+  </form>";
      
   echo $template->render($template_params);
 

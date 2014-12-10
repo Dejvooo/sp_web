@@ -57,31 +57,31 @@
   }
   
   
-  $template_params["header"] = "<h1>Editace hráče ".$hrac_selected["jmeno"]." ".$hrac_selected["prijmeni"];
+  $template_params["header"] = "<h1>Editace hráče ".$hrac_selected["jmeno"]." ".$hrac_selected["prijmeni"]."</h1>";
   
   // TABLE HEADER 
-  $template_params["table"] = "<table class='table table-hover'>";
+  $template_params["table"] = "<form action='?page=edit_hrac&amp;id=$id_hrac' method='post'>
+  <table class='table table-hover'>";
   
   // TABLE DATA
                                   
   $template_params["table"] .= "
-    <form action='' method='post'>
       <tr><td>Jméno:</td> <td><input type='text' name='jmeno' value='".@htmlspecialchars($hrac_selected['jmeno'], ENT_QUOTES)."'></td></tr>
       <tr><td>Příjmení:</td> <td><input type='text' name='prijmeni' value='".@htmlspecialchars($hrac_selected['prijmeni'], ENT_QUOTES)."'></td></tr>
       <tr><td>Číslo:</td> <td><input type='text' name='cislo' value='".@htmlspecialchars($hrac_selected['cislo'], ENT_QUOTES)."'></td></tr>
       <tr><td>Pozice:</td> <td><input type='text' name='pozice' value='".@htmlspecialchars($hrac_selected['pozice'], ENT_QUOTES)."'></td></tr>
-      <tr><td>Datum narození:</td> <td><input type='text' name='datum_narozeni'value='".@htmlspecialchars($hrac_selected['datum_narozeni'], ENT_QUOTES)."'></td></tr>
+      <tr><td>Datum narození:</td> <td><input type='text' name='datum_narozeni' value='".@htmlspecialchars($hrac_selected['datum_narozeni'], ENT_QUOTES)."'></td></tr>
       <tr><td>Výška:</td> <td><input type='text' name='vyska' value='".@htmlspecialchars($hrac_selected['vyska'], ENT_QUOTES)."'></td></tr>
       <tr><td>Váha:</td> <td><input type='text' name='vaha' value='".@htmlspecialchars($hrac_selected['vaha'], ENT_QUOTES)."'></td></tr>
       <tr><td>Draft rok:</td> <td><input type='text' name='draft_rok' value='".@htmlspecialchars($hrac_selected['draft_rok'], ENT_QUOTES)."'></td></tr>
       <tr><td>Draft kolo:</td> <td><input type='text' name='draft_kolo' value='".@htmlspecialchars($hrac_selected['draft_kolo'], ENT_QUOTES)."'></td></tr>
       <tr><td>Draft pozice:</td> <td><input type='text' name='draft_pozice' value='".@htmlspecialchars($hrac_selected['draft_pozice'], ENT_QUOTES)."'></td></tr>
       <tr><td>Univerzita:</td> <td><input type='text' name='univerzita' value='".@htmlspecialchars($hrac_selected['univerzita'], ENT_QUOTES)."'></td></tr>
-      <tr><td><button type='submit' name='edit_go' class='btn btn-primary'>Uložit</button></td><td></td></tr>
-    </form>";
+      <tr><td><button type='submit' name='edit_go' class='btn btn-primary'>Uložit</button></td><td></td></tr>";
   
   // TABLE FOOTER
-  $template_params["table"] .= "</table>";
+  $template_params["table"] .= "</table>
+  </form>";
      
   echo $template->render($template_params);
 

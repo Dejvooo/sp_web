@@ -38,7 +38,7 @@
       $_SESSION[SESSION_NAME]["time"] = time(); 
     }
     else {
-      $addUzivatel = htmlspecialchars($uzivatel->NewUzivatel(htmlspecialchars($_POST['nick'], ENT_QUOTES), htmlspecialchars($_POST['heslo1'], ENT_QUOTES), htmlspecialchars($_POST['email'], ENT_QUOTES));
+      $addUzivatel = $uzivatel->NewUzivatel(htmlspecialchars($_POST['nick'], ENT_QUOTES), htmlspecialchars($_POST['heslo1'], ENT_QUOTES), htmlspecialchars($_POST['email'], ENT_QUOTES));
       $_SESSION[SESSION_NAME]["msg"] = "
         <div class='alert alert-success' role='alert'>
           Vaše registrace proběhla úspěšně. Nyní se můžete přihlásit.
@@ -52,24 +52,24 @@
     $template_params["msg"] = $_SESSION[SESSION_NAME]["msg"];
   }
   
-  $template_params["header"] = "<h1>Registrace nového uživatele";
+  $template_params["header"] = "<h1>Registrace nového uživatele</h1>";
   
   // TABLE HEADER 
-  $template_params["table"] = "<table class='table table-hover'>";
+  $template_params["table"] = "<form action='?page=registrace' method='post'>
+  <table class='table table-hover'>";
   
   // TABLE DATA
                                   
   $template_params["table"] .= "
-    <form action='' method='post'>
       <tr><td>Uživatelské jméno:</td> <td><input type='text' name='nick' value='".@htmlspecialchars($_POST['nick'], ENT_QUOTES)."'></td></tr>
       <tr><td>Email:</td> <td><input type='text' name='email' value='".@$_POST['email']."'></td></tr>
       <tr><td>Heslo:</td> <td><input type='password' name='heslo1'></td></tr>
       <tr><td>Heslo znovu:</td> <td><input type='password' name='heslo2'></td></tr>
-      <tr><td><button type='submit' name='pridat_go' class='btn btn-success'>Registrovat</button> <button type='reset' class='btn btn-danger'>Reset</button></td> <td></td></tr>
-    </form>";
+      <tr><td><button type='submit' name='pridat_go' class='btn btn-success'>Registrovat</button> <button type='reset' class='btn btn-danger'>Reset</button></td> <td></td></tr>";
   
   // TABLE FOOTER
-  $template_params["table"] .= "</table>";
+  $template_params["table"] .= "</table>
+  </form>";
      
   echo $template->render($template_params);
 

@@ -42,7 +42,7 @@
   
   $template_params["header"] = ""; 
   if(isset($_SESSION[SESSION_NAME]["login"]) && $_SESSION[SESSION_NAME]["prava"] == 1) {
-    $template_params["header"] .= "<p align='right'><a href='?page=new_hrac&id=$id_tym'>[Draftovat hráče do týmu]</a> <a href='?page=edit_tym&id=$id_tym'>[Editovat tým]</a></p>";
+    $template_params["header"] .= "<p class='right'><a href='?page=new_hrac&amp;id=$id_tym'>[Draftovat hráče do týmu]</a> <a href='?page=edit_tym&amp;id=$id_tym'>[Editovat tým]</a></p>";
   }
 
   // HEADER
@@ -51,8 +51,8 @@
     <p>Stadion: ".$tym_selected['stadion']." (kapacita ".$tym_selected['kapacita']." sedadel)</p> 
     <p>Hlavní trenér: ".$tym_selected['trener']."</p> 
     <p>Web: <a href='".$tym_selected['web']."' target='_blank'>".$tym_selected['web']."</a></p> 
-    <p><a href='?page=tym&id=".$predchozi_tym."' class='btn btn-primary btn-lg' role='button'>&laquo; Předchozí tým</a>
-    <a href='?page=tym&id=".$nasledujici_tym."' class='btn btn-primary btn-lg' role='button'>Následující tým &raquo;</a></p>
+    <p><a href='?page=tym&amp;id=".$predchozi_tym."' class='btn btn-primary btn-lg' role='button'>&laquo; Předchozí tým</a>
+    <a href='?page=tym&amp;id=".$nasledujici_tym."' class='btn btn-primary btn-lg' role='button'>Následující tým &raquo;</a></p>
     "; 
 
   $all_hrac = $tym->LoadAllHracFromTym($id_tym);
@@ -66,8 +66,11 @@
         <th>Číslo</th>
         <th>Jméno</th>
         <th>Pozice</th>
-        <th>V týmu od sezony</th>
-      </tr>
+        <th>V týmu od sezony</th>";
+          if(isset($_SESSION[SESSION_NAME]["login"]) && $_SESSION[SESSION_NAME]["prava"] == 1) {
+          $template_params["table"] .= "<th></th>";  
+        }
+      $template_params["table"] .= "</tr>
     </thead>
     <tbody>";
   
@@ -77,11 +80,11 @@
      $template_params["table"] .= "
       <tr>
         <td>#".$all_hrac[$i]['cislo']."</td>
-        <td><a href='?page=hrac&id=".$all_hrac[$i]['id_hrac']."'>".$all_hrac[$i]['jmeno']." ".$all_hrac[$i]['prijmeni']."</a></td>  
+        <td><a href='?page=hrac&amp;id=".$all_hrac[$i]['id_hrac']."'>".$all_hrac[$i]['jmeno']." ".$all_hrac[$i]['prijmeni']."</a></td>  
         <td>".$all_hrac[$i]['pozice']."</td>
         <td>".$all_hrac[$i]['sezona']."</td>";
         if(isset($_SESSION[SESSION_NAME]["login"]) && $_SESSION[SESSION_NAME]["prava"] == 1) {
-          $template_params["table"] .= "<td><a href='?page=edit_hrac&id=".$all_hrac[$i]['id_hrac']."'>Editovat</a></td>";  
+          $template_params["table"] .= "<td><a href='?page=edit_hrac&amp;id=".$all_hrac[$i]['id_hrac']."'>Editovat</a></td>";  
         }
       $template_params["table"] .= "</tr>";
   }

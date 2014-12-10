@@ -71,15 +71,15 @@
     $template_params["msg"] = $_SESSION[SESSION_NAME]["msg"];
   }
     
-  $template_params["header"] = "<h1>Přidání nového hráče";
+  $template_params["header"] = "<h1>Přidání nového hráče</h1>";
   
   // TABLE HEADER 
-  $template_params["table"] = "<table class='table table-hover'>";
+  $template_params["table"] = "<form action='?page=new_hrac&amp;id=$id_tym' method='post'>
+  <table class='table table-hover'>";
   
   // TABLE DATA
                                   
   $template_params["table"] .= "
-    <form action='#' method='post'>
       <tr><td>Jméno:</td> <td><input type='text' name='jmeno' value='".@$_POST['jmeno']."'></td></tr>
       <tr><td>Příjmení:</td> <td><input type='text' name='prijmeni'  value='".@$_POST['prijmeni']."'></td></tr>
       <tr><td>Číslo:</td> <td><input type='text' name='cislo'  value='".@$_POST['cislo']."'></td></tr>
@@ -92,11 +92,11 @@
       <tr><td>Draft kolo:</td> <td><input type='text' name='draft_kolo' value='".@$_POST['draft_kolo']."'></td></tr>
       <tr><td>Draft pozice:</td> <td><input type='text' name='draft_pozice' value='".@$_POST['draft_pozice']."'></td></tr>
       <tr><td>Univerzita:</td> <td><input type='text' name='univerzita' value='".@$_POST['univerzita']."'></td></tr>
-      <tr><td><button type='submit' name='pridat_go' class='btn btn-primary'>Přidat hráče</button> <button type='reset' class='btn btn-danger'>Reset</button></td> <td></td></tr>
-    </form>";
+      <tr><td><button type='submit' name='pridat_go' class='btn btn-primary'>Přidat hráče</button> <button type='reset' class='btn btn-danger'>Reset</button></td> <td></td></tr>";
   
   // TABLE FOOTER
-  $template_params["table"] .= "</table>";
+  $template_params["table"] .= "</table>
+  </form>";
      
   echo $template->render($template_params);
 

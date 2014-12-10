@@ -92,38 +92,38 @@
     $template_params["msg"] = $_SESSION[SESSION_NAME]["msg"];
   }
   
-  $template_params["header"] = "<h1>Editace profilu";
+  $template_params["header"] = "<h1>Editace profilu</h1>";
   
   // TABLE HEADER 
-  $template_params["table"] = "<table class='table table-hover'>
+  $template_params["table"] = "<form action='?page=profil' method='post'>
+  <table class='table table-hover'>
     <caption>Změna emailu:</caption>";
   
   // TABLE DATA                           
   $template_params["table"] .= "
-    <form action='' method='post'>
       <tr><td class='col-md-4'>Uživatelské jméno:</td> <td><input disabled type='text' name='nick' value='".@htmlspecialchars($uzivatel_selected['nick'], ENT_QUOTES)."'></td></tr>
       <tr><td>Email:</td> <td><input type='text' name='email' value='".@htmlspecialchars($uzivatel_selected['email'], ENT_QUOTES)."'></td></tr>
-      <tr><td><button type='submit' name='email_edit_go' class='btn btn-primary'>Změnit email</button></td><td></td></tr>
-    </form>";
+      <tr><td><button type='submit' name='email_edit_go' class='btn btn-primary'>Změnit email</button></td><td></td></tr>";
   
   // TABLE FOOTER
-  $template_params["table"] .= "</table>";
+  $template_params["table"] .= "</table>
+  </form>";
   
   // TABLE HEADER 
-  $template_params["table"] .= "<table class='table table-hover'>
+  $template_params["table"] .= "<form action='?page=profil' method='post'>
+  <table class='table table-hover'>
     <caption>Změna hesla:</caption>";
   
   // TABLE DATA                           
   $template_params["table"] .= "
-    <form action='' method='post'>
       <tr><td class='col-md-4'>Staré heslo:</td> <td><input type='password' name='heslo_stare' value=''></td></tr>
       <tr><td>Nové heslo:</td> <td><input type='password' name='heslo_nove' value=''></td></tr>
       <tr><td>Potvrzení nového hesla:</td> <td><input type='password' name='heslo_nove2' value=''></td></tr>
-      <tr><td><button type='submit' name='heslo_edit_go' class='btn btn-primary'>Změnit heslo</button></td><td></td></tr>
-    </form>";
+      <tr><td><button type='submit' name='heslo_edit_go' class='btn btn-primary'>Změnit heslo</button></td><td></td></tr>";
   
   // TABLE FOOTER
-  $template_params["table"] .= "</table>";
+  $template_params["table"] .= "</table>
+  </form>";
      
   echo $template->render($template_params);
 

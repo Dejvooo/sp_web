@@ -48,8 +48,11 @@
       <tr>
         <th>Nick</th>
         <th>Email</th>
-        <th>Datum registrace</th>
-      </tr>
+        <th>Datum registrace</th>";
+          if(isset($_SESSION[SESSION_NAME]["login"]) && $_SESSION[SESSION_NAME]["prava"] == 1) {
+          $template_params["table"] .= "<th></th>";  
+        }
+      $template_params["table"] .= "</tr>
     </thead>
     <tbody>";
   
@@ -64,7 +67,7 @@
         <td>".$uzivatele_all[$i]['email']."</td>
         <td>".$datum."</td>";
       if (isset($_SESSION[SESSION_NAME]["login"])){
-          $template_params["table"] .= "<td><a href='?page=edit_uzivatel&id=".$uzivatele_all[$i]['id_uzivatel']."'>Editovat</a></td>";  
+          $template_params["table"] .= "<td><a href='?page=edit_uzivatel&amp;id=".$uzivatele_all[$i]['id_uzivatel']."'>Editovat</a></td>";  
         }
       $template_params["table"] .= "</tr>";
   }

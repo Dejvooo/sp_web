@@ -39,7 +39,7 @@
       $_SESSION[SESSION_NAME]["time"] = time(); 
     }
     else {
-      $addKomentar = $komentar->AddKomentar(htmlspecialchars($_POST['uzivatel'], ENT_QUOTES), htmlspecialchars($_POST['hrac'], ENT_QUOTES), htmlspecialchars($_POST['text'], ENT_QUOTES));
+      $addKomentar = $komentar->AddKomentar(htmlspecialchars($_POST['uzivatel'], ENT_QUOTES), htmlspecialchars($_POST['hrac'], ENT_QUOTES), $_POST['text']);
       $_SESSION[SESSION_NAME]["msg"] = "
         <div class='alert alert-success' role='alert'>
           Váš komentář byl úspěšně přidán.
@@ -104,7 +104,7 @@
   
   $template_params["header"] = ""; 
   if(isset($_SESSION[SESSION_NAME]["login"]) && $_SESSION[SESSION_NAME]["prava"] == 1){
-    $template_params["header"] .= "<p align='right'><a href='?page=edit_hrac&id=$id_hrac'>[Editovat hráče]</a></p>";
+    $template_params["header"] .= "<p class='right'><a href='?page=edit_hrac&amp;id=$id_hrac'>[Editovat hráče]</a></p>";
   }
   
   $template_params["header"] .= "    
@@ -112,9 +112,9 @@
     <p>Datum narození: ".$datum_narozeni."</p> 
     <p>Výška: ".$hrac_selected['vyska']." m</p> 
     <p>Váha: ".$hrac_selected['vaha']." kg</p> 
-    <p>Draft: <a href='?page=tym&id=".$hrac_selected['draft_tym']."'>".$hrac_selected['mesto']." ".$hrac_selected['nazev']."</a> (rok: ".$hrac_selected['draft_rok'].", ".$hrac_selected['draft_kolo'].". kolo, ".$hrac_selected['draft_pozice'].". pozice)</p> 
+    <p>Draft: <a href='?page=tym&amp;id=".$hrac_selected['draft_tym']."'>".$hrac_selected['mesto']." ".$hrac_selected['nazev']."</a> (rok: ".$hrac_selected['draft_rok'].", ".$hrac_selected['draft_kolo'].". kolo, ".$hrac_selected['draft_pozice'].". pozice)</p> 
     <p>Univerzita: ".$hrac_selected['univerzita']."</p> 
-    <p><a href='?page=tym&id=".$tym_hrace['tym']."' class='btn btn-primary btn-lg' role='button'>&laquo; Zpět na soupisku týmu</a></p>
+    <p><a href='?page=tym&amp;id=".$tym_hrace['tym']."' class='btn btn-primary btn-lg' role='button'>&laquo; Zpět na soupisku týmu</a></p>
   ";
 
   
@@ -122,7 +122,8 @@
   $pocet_prestup = count($all_prestup);
 
   // TABLE HEADER 
-  $template_params["table"] = "<table class='table table-hover table-striped'>
+  $template_params["table"] = "<form action='?page=hrac&amp;id=$id_hrac' method='post'>
+  <table class='table table-hover table-striped'>
   <caption>Přestupová historie:</caption>
     <thead>
       <tr>
@@ -147,7 +148,6 @@
          
   if(isset($_SESSION[SESSION_NAME]["login"]) && $_SESSION[SESSION_NAME]["prava"] == 1) {
     $template_params["table"] .= "
-      <form action='' method='post'>
         <tr>
           <td><input type='text' name='sezona'></td>
           <td><select name='tym'>";
@@ -155,16 +155,16 @@
                   $template_params["table"] .= "<option value='".$all_tym[$i]['id_tym']."'>".$all_tym[$i]['mesto']." ".$all_tym[$i]['nazev']."</option>";
                 }
     $template_params["table"] .= "</select>
-              <input type='submit' name='pridat_prestup_go' value='Odeslat'>
+              <input type='submit' name='pridat_prestup_go' class='btn btn-success' value='Odeslat' onclick='javascript:confirmPrestup()'>
           </td>
-        </tr>
-      </form>";
+        </tr>";
   }
   
   // TABLE FOOTER
   $template_params["table"] .= "
     </tbody>
-  </table>";
+  </table>
+  </form>";
 
 
   $all_komentar = $komentar->LoadAllKomentarFromHrac($id_hrac);
@@ -177,8 +177,11 @@
       <tr>
         <th>Datum</th>
         <th>Uživatel</th>
-        <th>Text</th>
-      </tr>
+        <th>Text</th>";
+        if(isset($_SESSION[SESSION_NAME]["login"]) && $_SESSION[SESSION_NAME]["prava"] == 1) {
+          $template_params["table"] .= "<th></th>";  
+        }
+      $template_params["table"] .= "</tr>
     </thead>
     <tbody>";
   
@@ -193,7 +196,7 @@
         <td class='col-md-2'><strong>".$all_komentar[$i]['nick']."</strong></td>  
         <td>".$all_komentar[$i]['text']."</td>";
       if(isset($_SESSION[SESSION_NAME]["login"]) && $_SESSION[SESSION_NAME]["prava"] == 1){
-          $template_params["table"] .= "<td><a href='javascript:confirmDelete(\"?page=hrac&id=$id_hrac&kom=".$all_komentar[$i]['id_komentar']."\")' >Editovat ".$all_komentar[$i]['id_komentar']."</a></td>";  
+          $template_params["table"] .= "<td><a href='javascript:confirmDelete(\"?page=hrac&amp;id=$id_hrac&amp;kom=".$all_komentar[$i]['id_komentar']."\")' class='btn btn-danger'>Odstranit</a></td>";  
         }
       $template_params["table"] .= "</tr>";
   }
@@ -209,7 +212,7 @@
     $id_hrac = $hrac_selected["id_hrac"];
     
     $template_params["table"] .= "
-      <form action='' method='post'>
+      <form action='?page=hrac&amp;id=$id_hrac' method='post'>
         <p><textarea name='text' class='ckeditor' > </textarea></p>
         <input type='hidden' name='uzivatel' value='$id_uzivatel'>
         <input type='hidden' name='hrac' value='$id_hrac'>

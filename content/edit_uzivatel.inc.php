@@ -55,15 +55,15 @@
     }
   }
   
-  $template_params["header"] = "<h1>Editace uživatele ".$uzivatel_selected["nick"];
+  $template_params["header"] = "<h1>Editace uživatele ".$uzivatel_selected["nick"]."</h1>";
   
   // TABLE HEADER 
-  $template_params["table"] = "<table class='table table-hover'>";
+  $template_params["table"] = "<form action='?page=edit_uzivatel&amp;id=$id_uzivatel' method='post'>
+  <table class='table table-hover'>";
   
   // TABLE DATA
                                   
   $template_params["table"] .= "
-    <form action='' method='post'>
       <tr><td>Uživatelské jméno:</td> <td><input disabled type='text' name='nick' value='".@htmlspecialchars($uzivatel_selected['nick'], ENT_QUOTES)."'></td></tr>
       <tr><td>Email:</td> <td><input type='text' name='email' value='".@htmlspecialchars($uzivatel_selected['email'], ENT_QUOTES)."'></td></tr>
       <tr><td>Oprávnění:</td> <td><select name='prava'>
@@ -73,11 +73,11 @@
                                     $template_params["table"] .= "selected='selected'";
                                     $template_params["table"] .= ">Administrátor</option>
                                   </select></td></tr>
-      <tr><td><button type='submit' name='edit_go' class='btn btn-primary'>Uložit</button></td><td></td></tr>
-    </form>";
+      <tr><td><button type='submit' name='edit_go' class='btn btn-primary'>Uložit</button></td><td></td></tr>";
   
   // TABLE FOOTER
-  $template_params["table"] .= "</table>";
+  $template_params["table"] .= "</table>
+  </form>";
      
   echo $template->render($template_params);
 

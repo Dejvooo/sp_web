@@ -4,3 +4,9 @@ function confirmDelete(delUrl) {
     document.location = delUrl;
   }
 }
+
+// Add prestup confirm
+function confirmPrestup() {
+  if (confirm("Opravdu chcete přidat přestup? Tuto akci již nebude možné vrátit zpět.")) {
+  }
+}
