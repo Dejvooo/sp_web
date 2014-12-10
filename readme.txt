@@ -14,3 +14,5 @@ Adresáře:
   •	css - Zde jsou další kaskádové styly, které nejsou součástí stylů Bootstrapu.
   •	templates - Šablony v HTLM, do kterých se pomocí Twigu doplňuje požadovaný obsah. Adresář obsahuje 2 šablony. Do šablony temp_default.htlm se vypisuje konkrétní obsah požadované stránky a šablona temp_menu.htlm zobrazuje hlavičku stránky a menu.
   •	twig - Soubory potřebné pro šablonovací systém Twig.
+
+Github: https://github.com/Dejvooo/sp_web
