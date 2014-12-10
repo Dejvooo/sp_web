@@ -1,0 +1,30 @@
+body {
+  padding-top: 70px;
+  padding-bottom: 30px;
+}
+
+.theme-dropdown .dropdown-menu {
+  position: static;
+  display: block;
+  margin-bottom: 20px;
+}
+
+.theme-showcase > p > .btn {
+  margin: 5px 0;
+}
+
+.theme-showcase .navbar .container {
+  width: auto;
+}
+
+.hidden-twig {
+  color: #222222;
+}
+
+#footer {
+  margin-top: 30px;
+  text-align: center ;
+  font: 12px;
+  width: 100%;  
+}
+/* CSS Document */
